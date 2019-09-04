@@ -1,10 +1,25 @@
 const express = require("express")
 const app = express()
 
-app.get("/",(req,res)=>{
-	res.send("hello world")
+const mongoose = require("mongoose")
+mongoose.connect("mongodb://localhost/todo",{useNewUrlParser:true})
+
+const Todo = require("./models/todo")
+
+const db = mongoose.connection
+
+db.on("error",()=>{
+	console.log("mongodb error")
 })
 
-app.listen(3000,()=>{
-	console.log("app is running")
+db.once("open",()=>{
+	console.log("mongodb connected")
+})
+
+app.get('/', (req, res) => {
+	res.send('hello world!')
+  })
+  
+app.listen(3000, () => {
+	console.log('App is running!')
 })
