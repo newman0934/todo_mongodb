@@ -1,7 +1,7 @@
 const mongoose = require('mongoose')
 const Todo = require('../todo')
 
-mongoose.connect('mongodb://localhost/todo', {useNewUrlParser:true})
+mongoose.connect('mongodb://localhost/test', {useNewUrlParser:true})
 
 const db = mongoose.connection
 
