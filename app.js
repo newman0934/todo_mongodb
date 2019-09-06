@@ -23,11 +23,15 @@ db.once("open", () => {
   console.log("mongodb connected");
 });
 
+const methodOverride = require("method-override")
+app.use(methodOverride("_method"))
+
+
 app.get("/", (req, res) => {
-  Todo.find((err, todos) => {
-    if (err) return console.error(err);
-    return res.render("index", { todos: todos });
-  });
+  Todo.find({}).sort({name:-1}).exec((err,todos)=>{
+    if(err) return console.error(err)
+    return res.render("index",{todos:todos})
+  })
 });
 // 列出全部 Todo
 app.get("/todos", (req, res) => {
@@ -62,7 +66,7 @@ app.get("/todos/:id/edit", (req, res) => {
   })
 });
 // 修改 Todo
-app.post("/todos/:id/edit", (req, res) => {
+app.put("/todos/:id", (req, res) => {
   Todo.findById(req.params.id,(err,todo)=>{
 	  if(err) return console.error(err)
     todo.name = req.body.name
@@ -78,7 +82,7 @@ app.post("/todos/:id/edit", (req, res) => {
   })
 });
 // 刪除 Todo
-app.post("/todos/:id/delete", (req, res) => {
+app.delete("/todos/:id/delete", (req, res) => {
   Todo.findById(req.params.id,(err,todo)=>{
 	  if(err) return console.error(err)
 	  todo.remove(err=>{
