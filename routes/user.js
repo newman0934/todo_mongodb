@@ -1,5 +1,5 @@
 const express = require("express")
-const router = express.Router
+const router = express.Router()
 
 //登入頁面
 router.get("/login",(req,res)=>{
@@ -23,7 +23,7 @@ router.post("/register",(req,res)=>{
 })
 
 router.get("/logout",(req,res)=>{
-    res.sned("logout")
+    res.send("logout")
 })
 
 module.exports = router
