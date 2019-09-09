@@ -31,6 +31,8 @@ app.use("/",require("./routes/home"))
 
 app.use("/todos",require("./routes/todos"))
 
+app.use("/users",require("./routes/user"))
+
 app.listen(3000, () => {
   console.log("app is running!");
 });
