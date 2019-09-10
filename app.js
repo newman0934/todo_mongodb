@@ -18,16 +18,16 @@ require("./config/passport")(passport)
 
 app.use((req,res,next)=>{
   res.locals.user = req.user
+  res.locals.isAuthenticated = req.isAuthenticated()
   next()
 })
-
 
 const exphbs = require("express-handlebars");
 app.engine("handlebars", exphbs({ defaultLayout: "main" }));
 app.set("view engine", "handlebars");
 
 const mongoose = require("mongoose");
-mongoose.connect("mongodb://localhost/todo", { useNewUrlParser: true });
+mongoose.connect("mongodb://localhost/todo", { useNewUrlParser: true,useCreateIndex:true });
 
 const bodyParser = require("body-parser");
 app.use(bodyParser.urlencoded({ extended: true }));

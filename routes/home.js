@@ -6,7 +6,7 @@ const {authenticated} = require("../config/auth")
 
 // 設定首頁路由器
 router.get('/', authenticated,(req, res) => {
-  Todo.find({})
+  Todo.find({userId: req.user._id})
   .sort({ name: 'asc' })
   .exec((err, todos) => {
     if (err) return console.error(err)

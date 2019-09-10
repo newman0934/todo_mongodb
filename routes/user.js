@@ -28,13 +28,7 @@ router.post("/register", (req, res) => {
     if (user) {
       // 檢查 email 是否存在
       console.log("User already exists");
-      res.render("register", {
-        // 使用者已經註冊過
-        name,
-        email,
-        password,
-        password2
-      });
+      res.render("register", {name,email,password,password2});
     } else {
       const newUser = new User({
         // 如果 email 不存在就直接新增
@@ -43,9 +37,7 @@ router.post("/register", (req, res) => {
         password:password
       });
 
-
-      newUser
-        .save()
+      newUser.save()
         .then(user => {
           res.redirect("/"); // 新增完成導回首頁
         })
@@ -55,7 +47,8 @@ router.post("/register", (req, res) => {
 });
 
 router.get("/logout", (req, res) => {
-  res.send("logout");
+  req.logOut()
+  res.redirect("/users/login")
 });
 
 module.exports = router;
