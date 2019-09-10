@@ -1,7 +1,7 @@
 const mongoose = require("mongoose")
 const Schem = mongoose.Schema
 const userSchem = new Schem({
-    nam:{
+    name:{
         type:String,
         required:true
     },
