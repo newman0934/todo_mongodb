@@ -10,7 +10,7 @@ const todoSchema = new Schema({
     default:false
   },
   userId:{
-    type:Scheme.Types.ObjectId,
+    type:Schema.Types.ObjectId,
     ref:"User",
     index:true,
     required:true
