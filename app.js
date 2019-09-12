@@ -1,6 +1,11 @@
 const express = require("express");
 const app = express();
 
+if(process.env.NODE_ENV !== "production"){
+  require("dotenv").config()
+}
+
+
 //載入session
 const session = require("express-session")
 app.use(session({
@@ -54,7 +59,7 @@ app.use("/todos",require("./routes/todos"))
 
 app.use("/users",require("./routes/user"))
 
-
+app.use("/auth",require("./routes/auths"))
 
 app.listen(3000, () => {
   console.log("app is running!");
