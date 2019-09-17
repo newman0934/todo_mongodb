@@ -44,7 +44,7 @@ app.use((req,res,next)=>{
 })
 
 const mongoose = require("mongoose");
-mongoose.connect("mongodb://localhost/todo", { useNewUrlParser: true,useCreateIndex:true });
+mongoose.connect(process.env.MONGODB_URI || "mongodb://localhost/todo", { useNewUrlParser: true,useCreateIndex:true });
 
 const bodyParser = require("body-parser");
 app.use(bodyParser.urlencoded({ extended: true }));
@@ -70,6 +70,6 @@ app.use("/todos",require("./routes/todos"))
 app.use("/users",require("./routes/user"))
 app.use("/auth",require("./routes/auths"))
 
-app.listen(3000, () => {
+app.listen(process.env.PORT || 3000, () => {
   console.log("app is running!");
 });
